@@ -1,3 +1,4 @@
+#!/usr/bin/env python2.7
 """
 Michael Martin mim3073@mail.harvard.edu
 
@@ -76,7 +77,7 @@ for sample in samples:
 	print sample
 	sample_trimmed=sample+'trimmed'
 	trimmed_samples.append(sample_trimmed)
-	'''
+
 	# 2. Trims the raw fastq files
 	os.system(
 		'java -jar trimmomatic-0.36.jar PE -phred33 '+sample+'_1.fastq.gz '+sample+'_2.fastq.gz '+
@@ -182,7 +183,7 @@ for sample in samples:
 	os.system("bcftools call -O v -m -v " + sample_trimmed +
 			  "_bwa_sorted_RG_RA_100_mq30_baq.mpileup | bcftools filter -i '(AD[1]/(AD[0]+AD[1]) > "+str(readcutoff)+") & (ADF[1]<=1 || ADR[1]<=1)' -o " +
 			  sample_trimmed + "_bwa_sorted_RG_RA_100_mq30_baq_bq50_dp20_sp60_ad1_failed_ad_filter.vcf")
-'''
+
 # 9. Removes variants which fail quality filters in any samples, have coverage of 0 in any samples, and which are in PE/PPE regions
 # Makes a .bed file called 'filtered_sites.bed' which contains the positions of variants which failed quality filters in
 # any of the samples.
