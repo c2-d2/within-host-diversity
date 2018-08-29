@@ -393,7 +393,7 @@ for l in xrange(0,len(samples)):
 		# If this snp is present in this sample
 		if samples[l] in csnps[j]:
 			# If the read frequency is >=snpcutoff add the variant base to the alignment
-			thisalignment.extend(snps[j][1][-1])
+			thisalignment.extend(csnps[j][1][-1])
 			csnp_counter+=1
 		# Else add the reference base to the alignment
 		else:
@@ -466,7 +466,7 @@ alignment.append(''.join(map(str,thisalignment)))
 
 hsnp_alignment.append(">REF")
 for j in xrange(0,len(hsnps)):
-	this_hsnp_alignment.append(snps[j][1][0])
+	this_hsnp_alignment.append(hsnps[j][1][0])
 hsnp_alignment.append(''.join(map(str,this_hsnp_alignment)))
 
 # Save cSNP and hSNP alignment
@@ -635,6 +635,13 @@ for text in leg.get_texts():
 plt.savefig(sys.argv[2]+"_dp_qual_mq",dpi=300)
 plt.close()
 
+for i in xrange(0,len(hsnps)):
+	this_dp=[]
+	if hsnps[i].count('')==0:
+		for j in xrange(3,len(hsnps[i]),2):
+			this_dp.append(hsnps[i][j][1])
+		print(hsnps[i][0])
+		print(np.mean(this_dp))			
 
 #cSNP hSNP correlation
 slope, intercept, r_value, p_value, std_err = stats.linregress(num_csnps,num_hsnps)
