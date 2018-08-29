@@ -62,9 +62,9 @@ for i in xrange(3,len(sys.argv)):
 
 # 1. Prepares the reference genome to be used with BWA and GATK
 # Creates BWA index
-#os.system("bwa index "+reference)
+os.system("bwa index "+reference)
 # Generates fasta index file
-#os.system('samtools faidx '+reference)
+os.system('samtools faidx '+reference)
 
 # Generates sequence dictionary
 #os.system(
